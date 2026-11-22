@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html data-page-node-id="TTvDoNPj6RSCU6jY6wErUg" lang="zh-CN">
+<head data-page-node-id="A3u9QFFqHd7VT9QO87vBRB">
+<script data-page-node-id="ehJaixlQZ8IM2ShOAhxCDR" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="qD7bFwiv0v8AQ7kHmOrlPh" charset="UTF-8">
+<meta data-page-node-id="4jq0Ke2X1zDjiOkgmJNl7y" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title data-page-node-id="ZYdPnN9h0tiOfQ8rdfBOhf" data-pnid-children="GV3RyEeAqL7D7wAdoRpi8n">打工人图鉴 · 你是哪一种</title>
+<style data-page-node-id="MvG1dWGf6oZmPslhxIgOef" data-pnid-children="PtulUXru0jlWEuUevk8GoV">
+  :root{
+    --paper:#F6F1E4; --ink:#22201D; --orange:#E2603F; --yellow:#E8B33C;
+    --green:#7A9A5B; --brown:#8B5E3C; --line:#22201D;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.65;
+    background-image:radial-gradient(circle at 18% 8%,rgba(226,96,63,.06) 0%,transparent 40%),
+                     radial-gradient(circle at 85% 82%,rgba(122,154,91,.07) 0%,transparent 45%);
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:28px 22px 60px;}
+  .hide{display:none!important;}
+  .card{background:#FFFDF7;border:2.5px solid var(--line);border-radius:16px;padding:22px 20px;box-shadow:5px 5px 0 rgba(34,32,29,.9);}
+
+  /* 封面 */
+  .cover{padding-top:26px;text-align:center;}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.22em;background:var(--ink);color:var(--paper);padding:5px 14px;border-radius:99px;margin-bottom:22px;}
+  h1{font-size:42px;line-height:1.18;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
+  h1 em{font-style:normal;position:relative;display:inline-block;}
+  h1 em::after{content:"";position:absolute;left:-4px;right:-4px;bottom:4px;height:14px;background:var(--yellow);z-index:-1;transform:rotate(-1.2deg);}
+  .sub{font-size:15px;color:#5B5650;margin-top:14px;letter-spacing:.02em;}
+  .cover-dex{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 10px;max-width:360px;margin-left:auto;margin-right:auto;}
+  .cover-dex div{background:#FFFDF7;border:2px solid var(--line);border-radius:10px;padding:3px;min-width:0;}
+  .cover-dex svg{width:100%;height:auto;display:block;}
+  .cover-dex span{font-size:9px;font-weight:800;display:block;line-height:1.15;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .cover-note{font-size:12px;color:#8A8377;margin-top:12px;}
+  .rules{text-align:left;font-size:14px;line-height:2;border-top:1.5px dashed #C9C1B2;padding-top:16px;margin-top:20px;}
+  .rules b{background:rgba(232,179,60,.38);padding:1px 5px;border-radius:4px;}
+  .btn{display:block;width:100%;border:2.5px solid var(--line);background:var(--ink);color:#FFFDF7;font-size:19px;font-weight:800;letter-spacing:.06em;padding:17px;border-radius:14px;margin-top:24px;cursor:pointer;box-shadow:4px 4px 0 rgba(34,32,29,.35);transition:transform .08s;font-family:inherit;}
+  .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 rgba(34,32,29,.35);}
+  .btn-ghost{background:#FFFDF7;color:var(--ink);box-shadow:4px 4px 0 rgba(34,32,29,.25);}
+  .foot-note{font-size:12px;color:#8A8377;margin-top:18px;line-height:1.8;}
+
+  /* 答题 */
+  .bar-wrap{height:8px;background:#E4DCCC;border-radius:99px;overflow:hidden;margin-bottom:8px;}
+  .bar{height:100%;width:0;background:var(--orange);border-radius:99px;transition:width .25s ease;}
+  .qmeta{display:flex;justify-content:space-between;font-size:12px;color:#7A7368;letter-spacing:.1em;margin-bottom:26px;}
+  .qtext{font-size:25px;font-weight:800;line-height:1.5;margin-bottom:26px;letter-spacing:-.3px;}
+  .opt{width:100%;text-align:left;background:#FFFDF7;border:2px solid var(--line);border-radius:13px;padding:16px 18px;font-size:16px;line-height:1.55;margin-bottom:12px;cursor:pointer;font-family:inherit;color:var(--ink);display:flex;gap:12px;align-items:flex-start;box-shadow:3px 3px 0 rgba(34,32,29,.18);transition:transform .07s;}
+  .opt:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(34,32,29,.18);}
+  .opt .tag{flex:0 0 26px;height:26px;border-radius:50%;background:var(--ink);color:#FFFDF7;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .opt span:last-child{flex:1;}
+
+  /* 结果 */
+  .hero{border-radius:16px;padding:22px 18px 24px;text-align:center;color:#FFF7E8;position:relative;overflow:hidden;}
+  .hero .upd{font-size:11px;letter-spacing:.2em;opacity:.9;font-weight:700;}
+  .hero svg{width:150px;height:auto;margin:8px auto 4px;display:block;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3));}
+  .hero .tname{font-size:32px;font-weight:900;letter-spacing:-.5px;text-shadow:0 2px 4px rgba(0,0,0,.2);}
+  .hero .ttag{font-size:14px;margin-top:6px;font-weight:600;opacity:.95;}
+  .sec-title{font-size:13px;font-weight:800;letter-spacing:.16em;color:#8A8377;margin:26px 0 12px;}
+  .bio{background:#FFFDF7;border:2px solid var(--line);border-radius:14px;padding:18px;font-size:15px;line-height:2;}
+  .sym{display:flex;gap:11px;margin-bottom:11px;font-size:15.5px;line-height:1.6;}
+  .sym i{font-style:normal;flex:0 0 22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:3px;}
+  .quote{margin-top:18px;padding:16px 18px;background:rgba(232,179,60,.22);border-left:5px solid var(--yellow);border-radius:0 12px 12px 0;font-size:17px;font-weight:700;line-height:1.6;}
+  .neighbor{display:flex;gap:8px;flex-wrap:wrap;}
+  .neighbor .nb{background:#FFFDF7;border:2px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px;font-weight:700;}
+  .dex{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .dex .cell{background:#FFFDF7;border:2px solid var(--line);border-radius:11px;padding:7px 5px 6px;text-align:center;position:relative;}
+  .dex .cell svg{width:100%;height:auto;display:block;}
+  .dex .cell .dn{font-size:11px;font-weight:800;margin-top:2px;line-height:1.2;}
+  .dex .cell.me{border-width:3px;border-color:var(--orange);box-shadow:3px 3px 0 rgba(226,96,63,.35);}
+  .dex .cell.me .dn{color:var(--orange);}
+  .dex .cell.me .here{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--orange);color:#FFFDF7;font-size:9px;font-weight:800;padding:2px 8px;border-radius:99px;white-space:nowrap;}
+  .dex .cell:not(.me){opacity:.78;}
+  .dex .cell:not(.me) svg{filter:grayscale(.6) opacity(.8);}
+  .share-card{margin-top:12px;background:var(--ink);color:#FFFDF7;border-radius:18px;padding:22px;text-align:center;}
+  .sc-fig{width:110px;margin:0 auto;}
+  .sc-fig svg{width:100%;height:auto;}
+  .sc-tn{font-size:24px;font-weight:900;margin-top:8px;}
+  .sc-tag{font-size:13px;color:#CFC7B8;margin-top:6px;}
+  .sc-quote{font-size:13px;color:#E8C97A;margin-top:14px;font-weight:700;line-height:1.6;}
+  .sc-mark{font-size:10px;letter-spacing:.16em;color:#8C8578;margin-top:16px;}
+  .share-tip{font-size:12.5px;color:#8A8377;text-align:center;margin-top:10px;}
+  .warn{margin-top:20px;font-size:13px;line-height:1.8;color:#5B5650;background:rgba(122,154,91,.13);border-radius:12px;padding:14px 16px;}
+  .actions{display:flex;gap:10px;margin-top:22px;}
+  .actions .btn{margin-top:0;font-size:16px;padding:14px;}
+</style>
+</head>
+<body data-page-node-id="7185aS2c61SrwrtZpZihxL">
+<div data-page-node-id="rFBMUn30fBpFVkqAF31F3A" class="wrap">
+
+  <!--pnid:YpM6UD5ftgPjSB8LONqq8E--><!-- 封面 -->
+  <section data-page-node-id="CQYF8DNg0lMRve2EbnuPVa" class="cover" id="cover">
+    <div data-page-node-id="cXadh559pknn9lxksSk8CS" class="kicker"><!--pnid:hr3B2FTq7Tfn8Ov0eBbzdc-->打 工 人 图 鉴</div>
+    <h1 data-page-node-id="3nOvEwkfzAWTD0rtN9UprP"><!--pnid:S35KqsvRwHcaoLzLlT3xUw-->你是哪一种<br data-page-node-id="b0Uhp4OFnrEdenXC4UGm5O"><em data-page-node-id="cUUPNYHuqisjiOeGA9GPHU"><!--pnid:HXg0AM82ob1lhCyt6Rl3vR-->打工人</em><!--pnid:N43F1Fszo7n8mpX5a47AYr-->？</h1>
+    <p data-page-node-id="77tAYRDImNagk1yt93tx6R" class="sub"><!--pnid:p3xK5qCPdG8focEcEdycay-->24 道题，从 24 款工位生物里<br data-page-node-id="bW3yM61D90JlbIMxZqlAW8"><!--pnid:hlSHuAQOU1v6fTG4fzKmTB-->认领你的那一张专属小人卡</p>
+    <div data-page-node-id="sYkpoSVIDBOhKhjsSOiNYE" class="cover-dex" id="coverDex"></div>
+    <div data-page-node-id="xMQIbspCGdht4UueuYfoOQ" class="cover-note"><!--pnid:d1vbth5zttQX495AR5lVNl-->▲ 图鉴收录 24 款，全是打工界活标本</div>
+    <div data-page-node-id="iykeTVvgmAx16U0R1F69ce" class="rules">
+      <div data-page-node-id="vIMKzgVFTNN5JYRqA5erl5"><!--pnid:ENxRUjlqfxVzC9ObZfm0Gt-->① 每题凭<b data-page-node-id="DjqZem3b4inSO1tCD84M3U"><!--pnid:Zljgn2eDNmqaegfygOKrNc-->第一直觉</b><!--pnid:739iaOWlyaUhio9AFTNInh-->，别想太多</div>
+      <div data-page-node-id="9QvgFxcT7Si3U82v6JhduQ"><!--pnid:QqMHeHqYAe6AZi3WIOmJxP-->② 没有标准答案，只有你本来的样子</div>
+      <div data-page-node-id="pyBdkepYJniOAN9BAP7O3z"><!--pnid:Y9uRInqSXjdqRJpYinvmTj-->③ 做完领卡，约 3 分钟</div>
+    </div>
+    <button data-page-node-id="Ahu3LNVMPEThAPBsjrAwIQ" class="btn" onclick="start()"><!--pnid:nGMc7ONP2p9JUrKq4pjn75-->开始认领</button>
+    <p data-page-node-id="iQJaGaFcosqnWZi4upjfah" class="foot-note"><!--pnid:O9uyYUgytFWawT8TzzhyFC-->不收集任何个人信息 · 结果只在你手机上计算<br data-page-node-id="EtLzOXdzdvMm3lpgfFoyfM"><!--pnid:cITrNDTg8h5XJoBy8I777S-->仅供娱乐，不是心理诊断</p>
+  </section>
+
+  <!--pnid:xKffkR1coX4EBS6LCxywuZ--><!-- 答题 -->
+  <section data-page-node-id="UkeBUs42ReaZ1D1RstZ8LX" class="hide" id="quiz">
+    <div data-page-node-id="r8VwHRuNlUkK8bnq8iZWaG" class="bar-wrap"><div data-page-node-id="8UO10Glia9Abh2ChnPRjLq" class="bar" id="bar"></div></div>
+    <div data-page-node-id="qZBvBpTTWC9DbUCGqMWun7" class="qmeta"><span data-page-node-id="Dnvd9AVzlBuxHqHd2JYOaN" id="qnum"><!--pnid:NqbuYSvI7S2hOPWhgE4gYa-->1 / 24</span><span data-page-node-id="0LU1sLnhXhmiE8i8l3a43x" id="qdime"><!--pnid:GJ05Jb03edcAhriXNsf2wk-->卷度</span></div>
+    <div data-page-node-id="9WyVzRYwnlVm4y56M5hLOF" class="qtext" id="qtext"></div>
+    <div data-page-node-id="bvVANRtfJMBo3NVIUzoLpg" id="opts"></div>
+  </section>
+
+  <!--pnid:D9eylWHpesff3xzi7coZQG--><!-- 结果 -->
+  <section data-page-node-id="KQezni17Q4rhZxQJiYl1Wc" class="hide" id="result">
+    <div data-page-node-id="3IGcxkX8VeGg0OoVCCqgV8" class="hero" id="hero">
+      <div data-page-node-id="RBI3eAnJnrkmoWmI3LGwJS" class="upd"><!--pnid:iwSXjQuNG2VLyDi1zOuTSa-->⚙ 图鉴档案已解锁 · NO.<span data-page-node-id="gYUi0hau7JgtJkT5UEODJb" id="rNo"></span></div>
+      <div data-page-node-id="HjhrrS1Tf64UpbyOVkgbxr" id="rFig"></div>
+      <div data-page-node-id="04li0uUNN3KnA3gLrAKmRp" class="tname" id="rName"></div>
+      <div data-page-node-id="1ajk4zYEbWgl65z8TT1ASx" class="ttag" id="rTag"></div>
+    </div>
+
+    <div data-page-node-id="OflO26SQjnqfON2nuuVZ89" class="sec-title"><!--pnid:jFSd7VajyOa4nCtr1pWLKI-->你身边的人都这么形容你</div>
+    <div data-page-node-id="ZfNpRZmne3ILM7amkTAF3F" id="rSyms"></div>
+
+    <div data-page-node-id="NHPJLcDnTSQS92iHRmABqU" class="sec-title"><!--pnid:9lDlQqq5MEnvXJP1XQpvKc-->人设小传</div>
+    <div data-page-node-id="NLoKXD4s4AWKbjMxNXogPE" class="bio" id="rBio"></div>
+
+    <div data-page-node-id="CsfBE5tMibkgqCvljXudw6" class="quote" id="rQuote"></div>
+
+    <div data-page-node-id="AnAz4WG6QV6kKwTgoIrKA5" class="sec-title"><!--pnid:so4HfHq6Z17QE1X8aetJoM-->灵魂近邻 · 你也沾点这些</div>
+    <div data-page-node-id="eJRov7TMP2g9INjjnjing4" class="neighbor" id="rNeighbor"></div>
+
+    <div data-page-node-id="bMm8CDPLbwjhKKxxnWriMP" class="sec-title"><!--pnid:ejaNyCWySdp6Y3AuQ9INrj-->24 款图鉴 · 集卡进度 1/24</div>
+    <div data-page-node-id="OQRV9P2tw5oSuPf5C8LImI" class="dex" id="rDex"></div>
+
+    <div data-page-node-id="WM0c72486eWq6mH7AK62eQ" class="sec-title"><!--pnid:FHF2uB2QN34kohieyFwYIl-->截图这张，看看同事是哪一款</div>
+    <div data-page-node-id="0D19W1bqmiiRgD7oKArNPs" class="share-card">
+      <div data-page-node-id="w7rXW0D7cURgcSrZDr0c3p" class="sc-fig" id="sFig"></div>
+      <div data-page-node-id="GLs1nhbmklfL2CfqMVIypA" class="sc-tn" id="sName"></div>
+      <div data-page-node-id="AS6CRX2hyuoPISSgkPldPO" class="sc-tag" id="sTag"></div>
+      <div data-page-node-id="cNKt0Dna6J2CSu245tYR7y" class="sc-quote" id="sQuote"></div>
+      <div data-page-node-id="zU9NIO6q2w2MYXjy4se1p3" class="sc-mark"><!--pnid:0DwOd6LHayvn3IiX0RT1lO-->打工人图鉴 · 24 款工位生物</div>
+    </div>
+    <div data-page-node-id="OgVia41DJDKUqoqBpVWLmu" class="share-tip"><!--pnid:8X49uZKQjdvlESxIEtrud9-->长按截图保存，发到群里对号入座</div>
+
+    <div data-page-node-id="6RBtmWdqS9yperBmQfHc3y" class="warn"><!--pnid:8MeFgS0S3Ms49SucwsZkkV-->本测试基于自陈式选择题，结果由固定规则计算，仅供娱乐与自我调侃，不构成任何专业建议。打工可以累，但别丢了对自己好一点的能力。</div>
+
+    <div data-page-node-id="cEWBZx4a6zeh91qvgLoYPM" class="actions">
+      <button data-page-node-id="TdoregsUf5md92KWltnWdy" class="btn btn-ghost" onclick="restart()"><!--pnid:pf8l8TM5i2Ob795brksIE6-->再测一次</button>
+      <button data-page-node-id="Z0WbCcjXphPvg7wUuwswZw" class="btn" onclick="shareTip()"><!--pnid:dkZkmtKdLTFcVlpl5TNFMn-->发给同事</button>
+    </div>
+    <p data-page-node-id="uDW0aExHNaU5odns27i67v" class="foot-note" style="text-align:center"><!--pnid:P4OPoT8i3dS6XBjVRXaR67-->所有插画均为手绘矢量图形 · 非 AI 生成</p>
+  </section>
+
+</div>
+
+<script data-page-node-id="ReqeBnPfOG0jf2rpepLRqh" data-pnid-children="XongT96D9r6zLumkychLal">
+/* ========= 配置 ========= */
+var ACCESS_TOKEN = "";
+
+var DIMS = ["卷度", "松弛", "社交", "内耗", "摸鱼", "反骨", "精致", "发疯"];
+var TYPES = [{"n": "赛博卷王", "tag": "CPU 烧冒烟，嘴上说随便", "color": "#D94F3D", "v": [1.33, -1.75, 0.163, 0.787, -0.837, -0.333, -0.323, -0.12], "cfg": {"face": "grin", "body": "#D94F3D", "legs": "#8B2E22", "acc": "bolt", "bg": "#FFE0D6"}, "line": ["需求改到第八版，你说『没事，正好再打磨一下』", "工位灯永远是最后灭的那盏，保安都认识你", "周报写得像战报，领导看了想给你磕一个"], "quote": "我不是内卷，我是在替全组卷。", "doc": "你的身体坐在工位，灵魂早就在晋升答辩的舞台上谢幕了三次。你把『做到最好』刻进 DNA，代价是体检报告上越来越多的箭头。别忘了：真正的卷王从不透露自己几点下班——因为他们根本不下班。", "oldv": [2, -2, 0, 1, -1, 0, 0, 0], "_ans": [3, 3, 3, 0, 0, 0, 2, 1, 2, 3, 2, 1, 0, 0, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1]}, {"n": "摸鱼艺术家", "tag": "工资买的是我的表演费", "color": "#3E9B8C", "v": [-0.67, 1.083, 0.163, -1.213, 1.83, -0.333, 0.677, 0.13], "cfg": {"face": "smug", "body": "#3E9B8C", "legs": "#1F6B5C", "acc": "phone", "bg": "#D6F2E8"}, "line": ["五个工作窗口开着，实际在看的东西藏在第六个", "老板一转身，你的 Alt+Tab 比心跳还快", "『这个我跟进一下』= 我又刷了半小时短视频"], "quote": "摸鱼不是偷懒，是给灵魂留的呼吸口。", "doc": "你把摸鱼做成了一门精密的手艺：何时看表、何时皱眉、何时在文档里敲两下键盘制造声响，都经过严格计算。你深知一个真理——表演工作是工作的一部分，而且你演得比真干的人还敬业。", "oldv": [-1, 1, 0, -1, 2, 0, 1, 0], "_ans": [0, 0, 0, 3, 3, 1, 2, 1, 2, 0, 1, 1, 3, 3, 3, 1, 2, 1, 3, 2, 1, 2, 1, 2]}, {"n": "已读不回侠", "tag": "消息进了黑洞，回音都没给你", "color": "#2C2C34", "v": [-0.226, 0.917, -1.837, 0.216, 0.941, 0.667, -0.323, 0.13], "cfg": {"face": "cool", "body": "#3A3F4A", "legs": "#22252B", "acc": "phone", "bg": "#DFE2E8"}, "line": ["99+ 未读红点，你视而不见像看风景", "『稍后回复』的稍后，是时区之外的那边", "你的已读时间，永远停在对方发『?』的前一秒"], "quote": "不是不回，是让消息先冷静一下。", "doc": "你的对话框是当代数字坟场，无数『在吗』『急』『看到回我』葬身于此。你并非冷漠，只是深谙一个道理：回得越快，活得越累。于是你把自己活成了一台只收不发的信号塔，安静，但有威慑力。", "oldv": [0, 1, -2, 0, 1, 1, 0, 0], "_ans": [0, 3, 0, 3, 3, 2, 0, 0, 0, 2, 1, 2, 3, 2, 1, 3, 2, 1, 1, 2, 1, 2, 1, 2]}, {"n": "发疯文学代表", "tag": "精神状态领先行业十年", "color": "#E0437A", "v": [-0.003, 0.083, 0.163, 0.787, -0.17, 2.0, -0.323, 1.88], "cfg": {"face": "crazy", "body": "#E0437A", "legs": "#9A1F50", "acc": "bang", "bg": "#FBD9E7"}, "line": ["工作群发 600 字小作文，发完秒撤回再发一遍", "嘴上『好的收到』，备忘录里已经写完遗书", "你发疯的样子，比 KPI 汇报还真诚"], "quote": "与其内耗自己，不如发疯外耗别人。", "doc": "你是当代打工人的情绪出口。当别人把委屈咽下去，你选择把它写成小作文发出来——配图、分段、加粗，一气呵成。你的精神状态让人羡慕，因为你替所有人说了他们不敢说的话。", "oldv": [0, 0, 0, 1, 0, 2, 0, 2], "_ans": [3, 0, 0, 1, 0, 3, 2, 1, 2, 3, 2, 1, 0, 3, 1, 3, 3, 3, 1, 2, 1, 3, 3, 3]}, {"n": "咖啡因续命体", "tag": "血管里流的不是血，是美式", "color": "#8B5E3C", "v": [1.683, -0.792, 0.31, 1.495, -0.323, -0.633, -0.614, -0.228], "cfg": {"face": "dead", "body": "#8B5E3C", "legs": "#5A3A22", "acc": "coffee", "bg": "#EBD9C6"}, "line": ["睁眼第一件事：找咖啡；找不到就找理由辞职", "一天四杯起步，心跳跟着打卡机走", "你不是来上班的，你是来给咖啡机面子"], "quote": "我可以没有工资，但不能没有冰美式。", "doc": "你的血液里流淌着浓缩咖啡因，你的灵魂靠多巴胺续费。你清楚地知道自己是靠什么撑着——不是理想，不是热爱，是那杯十二块钱的冰美式。别劝你少喝，你听不进去；你只听得见咖啡机工作的声音。", "oldv": [1, 0, 0, 1, 0, 0, 0, 0], "_ans": [3, 3, 3, 3, 2, 0, 2, 1, 2, 3, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1]}, {"n": "佛系摆烂僧", "tag": "无欲无求，甲方看了都想出家", "color": "#7A9A5B", "v": [-0.67, 1.25, 0.163, -1.784, 0.941, -0.333, -0.323, 0.13], "cfg": {"face": "smile", "body": "#7A9A5B", "legs": "#4E6B36", "acc": "pill", "bg": "#E2F0D2"}, "line": ["『都行』『随便』『你定』是你的三字真言", " deadline 前一天你还在泡茶，淡定得像在等的不是 deadline", "升职加薪？你连群里的红包都懒得抢"], "quote": "不是躺平，是看开了——反正躺不躺，工资都一样。", "doc": "你把自己活成了一个低欲望样本：不争、不抢、不急、不气。别人的 KPI 是你的取经路，你的 KPI 是把今天平稳度过。别觉得你没上进心——你只是把上进心的额度，全留给了周末的懒觉和外卖。", "oldv": [-2, 2, 0, -2, 1, 0, 0, 0], "_ans": [0, 0, 0, 3, 3, 2, 2, 1, 2, 0, 0, 0, 3, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2]}, {"n": "PPT 纺织女工", "tag": "一生热爱，全用在对齐格式上", "color": "#4A6BC4", "v": [1.33, -1.25, 0.163, 0.216, -0.837, -0.333, 2.01, 0.13], "cfg": {"face": "shifty", "body": "#4A6BC4", "legs": "#2A4490", "acc": "badge", "bg": "#D9E2FA"}, "line": ["一份 8 页的 PPT，你做了 80 页的动画", "字间距 0.5 的差别，你能盯到凌晨两点", "同事说『随便做做』，你听成了『做到极致』"], "quote": "内容不够，动画来凑；动画不够，渐变来凑。", "doc": "你相信格式即正义，对齐即尊严。你的 PPT 有统一字体、统一色号、统一图标风格，翻页动画丝滑得像德芙。至于内容——领导其实也没细看，但你的审美，拯救了整个部门的汇报体面。", "oldv": [2, -1, 0, 0, -1, 0, 2, 0], "_ans": [3, 3, 3, 0, 1, 0, 2, 1, 2, 2, 1, 2, 0, 0, 2, 1, 2, 1, 3, 3, 3, 2, 1, 2]}, {"n": "甩锅界艺术家", "tag": "不是我的问题，但一定是你听到的样子", "color": "#D9834A", "v": [-0.003, -0.083, 1.163, 0.216, -0.17, 2.0, -0.323, 0.13], "cfg": {"face": "smug", "body": "#D9834A", "legs": "#9A5528", "acc": "wind", "bg": "#FBE6D2"}, "line": ["『这个之前不是我负责的』说得比呼吸还自然", "出事第一反应：先拉个群，把关系理清楚", "你的复盘报告里，每一条都有别人的名字"], "quote": "我不是推卸责任，我是在帮责任找到它真正的主人。", "doc": "你深谙职场生存第一法则：功劳可以共享，锅必须精准投递。你甩锅时面带微笑、有理有据，甚至让对方觉得『好像真是我的问题』。这门手艺你练了多年，如今已臻化境——连背锅的人都挑不出毛病。", "oldv": [0, 0, 1, 0, 0, 2, 0, 0], "_ans": [3, 0, 0, 1, 1, 0, 3, 3, 1, 2, 1, 2, 1, 2, 1, 3, 3, 3, 1, 2, 1, 2, 1, 2]}, {"n": "开会复读机", "tag": "领导说一句，你复述三句", "color": "#6B6B8C", "v": [0.219, 0.25, 1.163, 0.216, -0.837, -1.333, -0.323, 0.13], "cfg": {"face": "shifty", "body": "#6B6B8C", "legs": "#44445E", "acc": "antenna", "bg": "#E2E2EE"}, "line": ["『领导的意思是……』你的转述比原话还长", "会议纪要你记得比谁都全，但没一句是自己的观点", "点头如捣蒜，是你在会上的主要运动量"], "quote": "我不生产观点，我只是观点的搬运工。", "doc": "你是会议室里最忠实的回音壁。领导抛出一句模糊的方向，你立刻用三句话把它『翻译』得更模糊。你的存在让每个会议都显得很热闹——虽然散会后没人记得你说了什么，但你确实说了，而且说了很多。", "oldv": [0, 0, 1, 0, -1, -1, 0, 0], "_ans": [3, 0, 2, 2, 1, 1, 3, 3, 1, 2, 1, 2, 0, 0, 2, 0, 1, 1, 1, 2, 1, 2, 1, 2]}, {"n": "已离职预备役", "tag": "身体在打卡，灵魂在投简历", "color": "#B4613C", "v": [-0.305, 1.238, -1.13, 1.062, 1.27, 0.9, -0.436, -0.162], "cfg": {"face": "dead", "body": "#B4613C", "legs": "#7E3E28", "acc": "suitcase", "bg": "#F3DCD2"}, "line": ["Boss 直聘的在线状态，比你的工作群还活跃", "面试请假理由：『牙疼』『胃疼』『家里有事』", "你的工位收拾得干干净净，随时准备体面地走"], "quote": "我不是在找工作，我是在给未来留一条退路。", "doc": "你的肉身还在这间办公室里，心早就飞到了下一家的offer上。你对公司的一切都保持着一种『随时会离开』的疏离感——不投入、不生气、不建感情。你只是在等一个信号，然后微笑着说出那句『感谢这几年的培养』。", "oldv": [0, 1, -1, 1, 1, 1, 0, 0], "_ans": [0, 3, 0, 3, 3, 2, 0, 1, 2, 3, 3, 1, 3, 2, 1, 3, 2, 1, 1, 2, 1, 1, 2, 1]}, {"n": "食堂干饭王", "tag": "干活不行，干饭第一", "color": "#E8A33C", "v": [-0.004, 1.238, 1.57, -1.638, -0.23, -0.45, -0.436, 0.176], "cfg": {"face": "grin", "body": "#E8A33C", "legs": "#A86A18", "acc": "burger", "bg": "#FFF0CE"}, "line": ["11:25 就开始收拾桌面，比下班还准时", "公司附近哪家好吃，你比导航还清楚", "你的工作动力，是中午那顿饭和下午的奶茶"], "quote": "打工是为了吃饭，但吃饭不是为了打工。", "doc": "你把一天切成两半：上午是熬，下午是等，中间那顿饭是你活着的全部意义。你对美食的执着令人感动——这份执着如果用在工作上，你早该当总监了。但你没有，你把才华都用在了『今天吃什么』这个世纪难题上。", "oldv": [0, 1, 1, -1, 0, 0, 0, 0], "_ans": [0, 3, 0, 2, 2, 2, 3, 3, 1, 0, 1, 1, 0, 3, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2]}, {"n": "工位园艺师", "tag": "养花养草，就是不养精神状态", "color": "#5E9B6E", "v": [-0.67, 1.25, 0.163, -1.784, -0.17, -0.333, 0.677, 0.13], "cfg": {"face": "smile", "body": "#5E9B6E", "legs": "#3A6B46", "acc": "sprout", "bg": "#DBF0DE"}, "line": ["工位绿植比你的业绩还茂盛，一盆接一盆", "给多肉浇水，比给客户回消息积极一百倍", "你的桌面是个小花园，就是不太像个工位"], "quote": "花会开，班会上完——但花比较好看。", "doc": "你把对生活的全部温柔，都倾注在了那几盆绿植上。它们不用写周报、不用开会、不会改需求，只会安静地长大。你照顾它们的时候，眼神里有一种久违的平和——那是你在面对领导时，从未有过的表情。", "oldv": [-1, 2, 0, -2, 0, 0, 1, 0], "_ans": [0, 0, 0, 2, 2, 2, 2, 1, 2, 0, 0, 0, 1, 2, 1, 1, 2, 1, 3, 2, 1, 2, 1, 2]}, {"n": "深夜 emo 诗人", "tag": "白天的社畜，夜里的哲学家", "color": "#7A5EA8", "v": [-0.003, 0.917, -1.837, 1.644, -0.17, -0.333, -0.323, 0.88], "cfg": {"face": "hollow", "body": "#7A5EA8", "legs": "#4E3A72", "acc": "cloud", "bg": "#E6DEF5"}, "line": ["凌晨两点的网易云，是你的精神故乡", "朋友圈仅自己可见的小作文，比周报还多", "你说『我没事』的时候，通常最沉默"], "quote": "白天的我属于公司，凌晨的我才属于我自己。", "doc": "你有两个人格：白天的你，专业、克制、有求必应；深夜的你，敏感、柔软、写了删删了写。你不是在报复性熬夜，你只是想找回一点点属于自己的时间——哪怕那段时间里，你只是在发呆。", "oldv": [0, 1, -2, 2, 0, 0, 0, 1], "_ans": [0, 3, 0, 2, 2, 3, 0, 0, 0, 3, 3, 3, 0, 3, 1, 1, 2, 1, 1, 2, 1, 3, 2, 1]}, {"n": "反骨小王子", "tag": "让干嘛偏不干，是刻在 DNA 里的", "color": "#E04A3A", "v": [-0.003, -0.083, 0.163, 0.216, -0.17, 2.0, -0.323, 1.13], "cfg": {"face": "angry", "body": "#E04A3A", "legs": "#9C2A1E", "acc": "bang", "bg": "#FADBD6"}, "line": ["『这个需求很合理』——你说完自己都笑了", "领导说往东，你先往西看看有没有近路", "你是全组唯一敢在会上说『我不同意』的人"], "quote": "我不是刺头，我只是不想闭着眼睛跟着走。", "doc": "你身上有一种珍贵的东西：不轻易服从的本能。你不吵不闹，只是每次都多问一句『为什么』——这一句，让很多人不舒服，也让很多错误的需求及时止步。你的反骨不是叛逆，是还没被磨灭的、珍贵的判断力。", "oldv": [0, 0, 0, 0, 0, 2, 0, 1], "_ans": [3, 0, 0, 1, 1, 0, 2, 1, 2, 3, 0, 2, 1, 2, 1, 3, 3, 3, 1, 2, 1, 3, 2, 2]}, {"n": "薛定谔的社恐", "tag": "群里 I 人，线下 E 人，看心情", "color": "#5E5CE6", "v": [-0.006, -0.158, 2.21, 0.41, -0.323, -0.633, -0.614, 0.247], "cfg": {"face": "shifty", "body": "#5E5CE6", "legs": "#3D3AA8", "acc": "q", "bg": "#E2E2FB"}, "line": ["群聊里沉默是金，线下聚会上你是气氛组", "『我来吧』和『我不行』在你脑内反复横跳", "社恐还是社牛，取决于桌上有没有你爱吃的菜"], "quote": "我不是社恐，我只是对社交有选择性。", "doc": "你的社交状态是量子力学的——不观察时处于叠加态，一旦被点到名就瞬间坍缩。你能在饭桌上谈笑风生，也能在群消息里隐身三天。别费劲给你贴标签了，你本来就是个随时切换的复杂个体。", "oldv": [0, 0, 1, 0, 0, 0, 0, 0], "_ans": [3, 0, 0, 1, 1, 0, 3, 3, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2]}, {"n": "准时下班战神", "tag": "到点电脑一合，谁也留不住", "color": "#2FA0C4", "v": [1.108, -1.75, 0.163, -1.213, -1.059, 1.333, -0.323, 0.13], "cfg": {"face": "cool", "body": "#2FA0C4", "legs": "#166B8C", "acc": "bolt", "bg": "#D6EFF7"}, "line": ["18:00:00 关机，比打卡机的指针还准", "『我明天一早处理』是你的标准谢幕词", "你在电梯里的笑脸，是全天最真诚的笑"], "quote": "钱可以少赚，但我的晚上一秒都不能少。", "doc": "你把工作和生活的边界，画得像国境线一样清晰。别人觉得你不够拼，其实你只是比谁都清楚：多待的那两个小时，既不会变成钱，也不会变成健康。你准时离开的背影，是给所有还坐着的人，做的一次无声示范。", "oldv": [1, -2, 0, -1, -1, 1, 0, 0], "_ans": [3, 3, 3, 0, 0, 0, 2, 1, 2, 0, 0, 1, 1, 0, 1, 3, 2, 2, 1, 2, 1, 2, 1, 2]}, {"n": "细节控本控", "tag": "像素级较真，折磨别人娱乐自己", "color": "#C4763E", "v": [1.108, -1.25, 0.163, 0.216, -1.059, -0.333, 2.01, 0.13], "cfg": {"face": "shifty", "body": "#C4763E", "legs": "#8C4A1C", "acc": "badge", "bg": "#F7E6D2"}, "line": ["『这个字号再大 0.5 号』是你的口头禅", "别人交的那个叫稿，你交的那个叫作品", "你改需求的速度，比提需求的人还快"], "quote": "要么不做，要做就做到让自己挑不出毛病。", "doc": "你对细节的执着，是一种甜蜜的负担——对你自己是甜蜜，对同事是负担。你能发现别人看不见的 1 像素偏移，也能为了一个标点改三遍。这份较真让你累，但也让你手里的东西，始终是全场最靠谱的那一份。", "oldv": [1, -1, 0, 0, -1, 0, 2, 0], "_ans": [3, 3, 3, 0, 1, 0, 2, 1, 2, 2, 1, 2, 1, 0, 1, 1, 2, 1, 3, 3, 3, 2, 1, 2]}, {"n": "职场老好人", "tag": "不会说不，是全组的万能替补", "color": "#D97A9A", "v": [-0.67, 1.083, 1.83, 0.216, -0.17, -2.0, -0.323, 0.13], "cfg": {"face": "smile", "body": "#D97A9A", "legs": "#9C4A68", "acc": "heart", "bg": "#FBE0EA"}, "line": ["『帮我一下呗』——你说好的速度比呼吸还快", "同事的锅你背，同事的班你加，同事的奶茶你付", "你的待办清单里，一半是别人的事"], "quote": "善良没错，只是下次，能不能先问问我愿不愿意。", "doc": "你是办公室的润滑剂，是所有人都喜欢、却最常忽略的那个人。你太害怕冲突，太习惯迁就，于是把自己活成了一块来者不拒的海绵。请记得：真正的关系，不会因为你偶尔说一次『不』就崩塌。", "oldv": [-1, 1, 2, 0, 0, -2, 0, 0], "_ans": [0, 0, 0, 2, 2, 1, 3, 3, 3, 2, 1, 2, 1, 2, 1, 0, 0, 0, 1, 2, 1, 2, 1, 2]}, {"n": "数字算命师", "tag": "一切都用数据说话，除了心情", "color": "#3E9B8C", "v": [1.33, -1.083, 0.163, -1.213, -0.17, -0.333, 0.677, 0.13], "cfg": {"face": "cool", "body": "#3E9B8C", "legs": "#1F6B5C", "acc": "badge", "bg": "#D6F2E8"}, "line": ["开会必带 Excel，没数据你就不开口", "『环比增长 3.7%』是你的情感表达方式", "你连午休都做成表格，精确到分钟"], "quote": "如果不能量化，那它就不重要——至少在会议室里是这样。", "doc": "你相信一切都能被度量：工作量、产出、效率，甚至快乐。你把生活过成一张仪表盘，每一个数字都清清楚楚。这种理性让你在工作中无往不利，也让你偶尔忘了——有些东西，比如此刻窗外那场好看的雨，是没法被填进表格里的。", "oldv": [2, 0, 0, -1, 0, 0, 1, 0], "_ans": [3, 3, 3, 0, 3, 0, 2, 1, 2, 0, 1, 1, 0, 3, 1, 1, 2, 1, 3, 2, 1, 2, 1, 2]}, {"n": " 截图留痕侠", "tag": "凡事留痕，聊天记录是你的护身符", "color": "#8A8377", "v": [-0.006, -0.158, 0.31, 0.41, -0.323, 1.267, 1.286, 0.247], "cfg": {"face": "shifty", "body": "#8A8377", "legs": "#5C5850", "acc": "badge", "bg": "#E8E4DA"}, "line": ["重要的事绝不语音，必须打字，必须截图", "你的相册里全是聊天记录，比生活照还多", "『这个我当时说过』——你拿得出截图为证"], "quote": "我不是多疑，我只是尊重证据的力量。", "doc": "你活在这个时代最清醒的人之一：你知道口头承诺会过期，但截图不会。你留的每一条记录，都是给未来的自己留的一把伞。这份谨慎或许显得疲惫，但在这个健忘的职场里，它无数次把你从坑里捞了出来。", "oldv": [0, 0, 0, 0, 0, 1, 1, 0], "_ans": [3, 0, 0, 1, 1, 0, 2, 1, 2, 2, 1, 2, 1, 2, 1, 3, 2, 1, 3, 2, 1, 2, 1, 2]}, {"n": "团建消失术", "tag": "一到集体活动，你就有了八种病", "color": "#9C7CB8", "v": [-0.226, -0.917, -1.837, -0.07, 0.941, -0.333, -0.323, 0.13], "cfg": {"face": "shock", "body": "#9C7CB8", "legs": "#6E5290", "acc": "cloud", "bg": "#ECE2F5"}, "line": ["团建通知一出，你的胃疼、头疼、猫也要绝育", "『你们去吧，我留守』说得无比真诚", "集体合影里，你永远是那个模糊的边缘人"], "quote": "不是不合群，是我的电量只够应付工作，不够应付热闹。", "doc": "你对集体活动的恐惧，是一种纯粹的、面向灵魂的疲惫。你不是不喜欢人，你只是太清楚热闹之后要花多久才能充电回来。于是你选择消失——用各种借口，换一个安静的、不用假装快乐的晚上。", "oldv": [-1, -2, -2, 0, 1, 0, 0, 0], "_ans": [2, 1, 1, 0, 0, 1, 0, 0, 0, 1, 2, 1, 3, 3, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2]}, {"n": "PPT 之外的诗人", "tag": "周报写得像散文，方案写得像情书", "color": "#C4769E", "v": [-0.003, -0.083, 1.163, 0.216, -0.17, -0.333, 2.01, 1.13], "cfg": {"face": "sparkle", "body": "#C4769E", "legs": "#8C4A6E", "acc": "star", "bg": "#F8E0EE"}, "line": ["你的周报有起承转合，读完像看了一篇短文", "『赋能』『抓手』『闭环』在你笔下都有了感情", "同事说：看你写的东西，我以为公司在搞文学"], "quote": "既然都要写字，为什么不写得好看一点呢？", "doc": "你把职场黑话写成了诗，把工作总结写成了散文。别人视写周报为酷刑，你视它为创作——起承转合、遣词造句，字字珠玑。这份才华没地方安放，于是你把它藏在了每一份『alignment』和『sync』里。", "oldv": [0, 0, 1, 0, 0, 0, 2, 1], "_ans": [3, 0, 0, 1, 1, 0, 3, 3, 1, 3, 0, 2, 1, 2, 1, 1, 2, 1, 3, 3, 3, 3, 2, 2]}, {"n": "咖啡渣预言家", "tag": "玄学办公，电子木鱼常驻后台", "color": "#B8904A", "v": [-0.905, 1.688, 0.22, 0.292, 1.27, -0.45, -0.436, 1.188], "cfg": {"face": "smile", "body": "#B8904A", "legs": "#82662E", "acc": "pill", "bg": "#F3EBCF"}, "line": ["真正的决策从不靠逻辑，靠今天宜忌", "重要会议前，你必须转发那条锦鲤", "你说『感觉不吉利』的时候，真的会改日程"], "quote": "科学让我困惑，玄学让我安心。", "doc": "你在工位摆了一个小小的仪式角：转运手串、招财摆件、电子木鱼 App。你不迷信，你只是想在失控的职场里，抓住一点点『一切会好起来』的确定感。这份小小的迷信，是你给自己搭的精神防空洞。", "oldv": [-1, 1, 0, 0, 1, 0, 0, 1], "_ans": [0, 0, 0, 3, 3, 3, 2, 1, 2, 3, 0, 2, 3, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 1]}, {"n": "加班表演艺术家", "tag": "人在心不在，但灯必须亮着", "color": "#C45A5A", "v": [1.108, -1.083, 0.163, 0.216, 1.163, -0.333, -0.323, 0.13], "cfg": {"face": "dead", "body": "#C45A5A", "legs": "#8C3636", "acc": "coffee", "bg": "#F4DEDE"}, "line": ["你加班不是因为活多，是因为『走得早不好看』", "工位灯亮着，你在刷剧，时不时敲两下键盘", "你的加班时长，是全组最漂亮的表演数据"], "quote": "我加的不是班，是给老板的安全感。", "doc": "你精通一门古老的职场行为艺术：『在场』。你的身体在工位，灵魂早回家了；你的屏幕亮着，页面停在刚打开的购物网站。你知道这没有意义，但你也知道——有时候，被看见比做出来更重要。", "oldv": [2, -1, 0, 0, 1, 0, 0, 0], "_ans": [3, 3, 3, 0, 3, 0, 2, 1, 2, 2, 1, 2, 3, 3, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2]}];
+var Q = [{"q": "下班点到了，活还剩一点，你：", "opts": [{"t": "关电脑走人，明天再说", "d": {"1": 2}}, {"t": "看心情，不急就走", "d": {"1": 1}}, {"t": "顺手做完再走", "d": {"0": 1}}, {"t": "留下来优化一下，顺便加个班", "d": {"0": 2}}]}, {"q": "领导说『这个谁愿意接』，你：", "opts": [{"t": "低头假装看屏幕", "d": {"1": 2}}, {"t": "环顾四周，等别人举手", "d": {"1": 1}}, {"t": "想了想，举手", "d": {"0": 1}}, {"t": "抢着接，还说了句谢谢领导", "d": {"0": 2}}]}, {"q": "周末群里有人@你问工作，你：", "opts": [{"t": "周末不谈工作，已读不回", "d": {"1": 2, "4": 1}}, {"t": "瞄一眼，周一再说", "d": {"1": 1}}, {"t": "顺手回了", "d": {"0": 1}}, {"t": "不光回，还主动补了个方案", "d": {"0": 2}}]}, {"q": "休年假时，你会：", "opts": [{"t": "不敢休，怕落后", "d": {"0": 1, "1": -2}}, {"t": "休，但手机不离手", "d": {"1": 1}}, {"t": "安心休，工作交接好就行", "d": {"1": 2}}, {"t": "休满，还延长两天", "d": {"1": 2, "4": 1}}]}, {"q": "终于盼到周五下午，你：", "opts": [{"t": "还在焦虑下周的事", "d": {"1": -2, "3": 1}}, {"t": "有点松弛，但不敢太放松", "d": {"1": 1}}, {"t": "心已经飞了，手上还行", "d": {"1": 2}}, {"t": "彻底摆烂，谁也别找我", "d": {"1": 2, "4": 1}}]}, {"q": "下班后的时间，你通常：", "opts": [{"t": "还在想工作的事", "d": {"0": 1, "1": -2}}, {"t": "刷手机，但心里有点虚", "d": {"1": 1}}, {"t": "做点自己的事，理直气壮", "d": {"1": 2}}, {"t": "彻底放飞，工作是什么", "d": {"1": 2, "7": 1}}]}, {"q": "部门团建通知，你：", "opts": [{"t": "找借口不去", "d": {"2": -2}}, {"t": "去，但坐在角落", "d": {"2": -1}}, {"t": "正常参加，聊得来", "d": {"2": 1}}, {"t": "主动组织，还暖场", "d": {"2": 2}}]}, {"q": "午饭时间，你：", "opts": [{"t": "自带，一个人吃", "d": {"2": -2}}, {"t": "随便吃点，不主动约人", "d": {"2": -1}}, {"t": "喊上熟的同事一起", "d": {"2": 1}}, {"t": "张罗一桌，还建了个饭群", "d": {"2": 2}}]}, {"q": "群里有人发了个冷笑话，你：", "opts": [{"t": "划过去，不参与", "d": {"2": -1}}, {"t": "看别人反应", "d": {"2": 0}}, {"t": "回个哈哈哈", "d": {"2": 1}}, {"t": "接了个更冷的，还带表情包", "d": {"2": 2}}]}, {"q": "需求临时改了三遍，你：", "opts": [{"t": "内心毫无波澜，改就改", "d": {"3": -2}}, {"t": "有点烦，但很快过去", "d": {"3": -1}}, {"t": "心里骂人，手上照改", "d": {"3": 1}}, {"t": "当场发疯，写小作文", "d": {"3": 2, "7": 1}}]}, {"q": "被当众批评，你：", "opts": [{"t": "左耳进右耳出", "d": {"3": -2}}, {"t": "有点难受，过会儿就好", "d": {"3": -1}}, {"t": "晚上躺床上复盘十遍", "d": {"3": 1}}, {"t": "当场想回怼，回家越想越气", "d": {"3": 2}}]}, {"q": "领导迟迟不回你消息，你：", "opts": [{"t": "该干嘛干嘛，不放在心上", "d": {"3": -2}}, {"t": "等呗，急什么", "d": {"3": -1}}, {"t": "反复看手机，猜他什么意思", "d": {"3": 1}}, {"t": "脑补了一整部宫斗剧", "d": {"3": 2}}]}, {"q": "上班八小时，你的有效工作时长：", "opts": [{"t": "全程专注，几乎不停", "d": {"4": -2, "0": 1}}, {"t": "大部分时间在干活", "d": {"4": -1}}, {"t": "一半干活一半摸鱼", "d": {"4": 1}}, {"t": "摸鱼是主业，干活是副业", "d": {"4": 2}}]}, {"q": "你的电脑屏幕上：", "opts": [{"t": "全是工作文档", "d": {"4": -2}}, {"t": "主要是工作", "d": {"4": -1}}, {"t": "一半一半", "d": {"4": 1}}, {"t": "五个聊天窗+一个工作窗", "d": {"4": 2}}]}, {"q": "老板从背后走过，你：", "opts": [{"t": "毫不在意，本来就在干活", "d": {"4": -2}}, {"t": "略微紧张", "d": {"4": -1}}, {"t": "熟练地切回工作界面", "d": {"4": 1}}, {"t": "Alt+Tab 快到有残影", "d": {"4": 2}}]}, {"q": "领导说『我说的都对』，你：", "opts": [{"t": "点头如捣蒜", "d": {"5": -2}}, {"t": "嗯嗯是是", "d": {"5": -1}}, {"t": "表面应和，心里有判断", "d": {"5": 1}}, {"t": "当场举了个反例", "d": {"5": 2}}]}, {"q": "遇到不合理的要求，你：", "opts": [{"t": "默默照做", "d": {"5": -2}}, {"t": "不太情愿但还是做了", "d": {"5": -1}}, {"t": "委婉提出疑问", "d": {"5": 1}}, {"t": "直接说不，还讲道理", "d": {"5": 2}}]}, {"q": "公司的画饼大会，你：", "opts": [{"t": "认真记笔记，深受鼓舞", "d": {"5": -2}}, {"t": "听听就好", "d": {"5": -1}}, {"t": "偷偷翻个白眼", "d": {"5": 1}}, {"t": "当场问『什么时候兑现』", "d": {"5": 2}}]}, {"q": "你的工位：", "opts": [{"t": "堆满外卖盒，能用就行", "d": {"6": -2}}, {"t": "有点乱但能找到东西", "d": {"6": -1}}, {"t": "收拾得挺整齐", "d": {"6": 1}}, {"t": "绿植+手办+香薰，像样板间", "d": {"6": 2}}]}, {"q": "写周报时，你：", "opts": [{"t": "一句话打发", "d": {"6": -2}}, {"t": "简单罗列做完的事", "d": {"6": -1}}, {"t": "认真写，分点清楚", "d": {"6": 1}}, {"t": "小作文+金句+排版，堪称作品", "d": {"6": 2}}]}, {"q": "开会做记录，你：", "opts": [{"t": "基本不记", "d": {"6": -2}}, {"t": "记几个关键词", "d": {"6": -1}}, {"t": "记得挺全", "d": {"6": 1}}, {"t": "分类+标色+编号，像在做手账", "d": {"6": 2}}]}, {"q": "遇到离谱的事，你：", "opts": [{"t": "深呼吸，告诉自己冷静", "d": {"7": -2}}, {"t": "心里吐槽两句就算了", "d": {"7": -1}}, {"t": "找朋友吐槽一顿", "d": {"7": 1}}, {"t": "当场表演一个原地发疯", "d": {"7": 2}}]}, {"q": "你的精神状态：", "opts": [{"t": "稳定得像块石头", "d": {"7": -2}}, {"t": "偶尔波动，总体还行", "d": {"7": -1}}, {"t": "时好时坏，看当天的事", "d": {"7": 1}}, {"t": "已经领先行业十年", "d": {"7": 2}}]}, {"q": "发朋友圈，你：", "opts": [{"t": "几乎不发", "d": {"7": -2}}, {"t": "只发转发和官方内容", "d": {"7": -1}}, {"t": "发点日常和自拍", "d": {"7": 1}}, {"t": "发发疯小作文和表情包", "d": {"7": 2}}]}];
+
+/* ========= 小人生成器 ========= */
+var _uid=0;
+function sh(hex,amt){
+  var n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  function cl(v){v=Math.round(v);return Math.max(0,Math.min(255,v));}
+  if(amt>=0){r+=(255-r)*amt;g+=(255-g)*amt;b+=(255-b)*amt;}
+  else{r*=(1+amt);g*=(1+amt);b*=(1+amt);}
+  return "rgb("+cl(r)+","+cl(g)+","+cl(b)+")";
+}
+function legoF(c){
+  _uid++;
+  var u="bw"+_uid;
+  var body=c.body,legs=c.legs,head=c.head||"#FFD24A";
+  var dkb=sh(body,-0.42),ltb=sh(body,0.3),dkl=sh(legs,-0.42),ltl=sh(legs,0.28);
+  var dkh=sh(head,-0.4),lth=sh(head,0.38);
+  var ink="#26221B";
+  var s='<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg"><defs>';
+  s+='<linearGradient id="'+u+'b" x1="0" y1="0" x2="1" y2="0">'
+    +'<stop offset="0" stop-color="'+dkb+'"/><stop offset="0.22" stop-color="'+ltb+'"/>'
+    +'<stop offset="0.5" stop-color="'+body+'"/><stop offset="1" stop-color="'+dkb+'"/></linearGradient>';
+  s+='<linearGradient id="'+u+'l" x1="0" y1="0" x2="1" y2="0">'
+    +'<stop offset="0" stop-color="'+dkl+'"/><stop offset="0.22" stop-color="'+ltl+'"/>'
+    +'<stop offset="0.5" stop-color="'+legs+'"/><stop offset="1" stop-color="'+dkl+'"/></linearGradient>';
+  s+='<linearGradient id="'+u+'h" x1="0" y1="0" x2="1" y2="0">'
+    +'<stop offset="0" stop-color="'+dkh+'"/><stop offset="0.2" stop-color="'+lth+'"/>'
+    +'<stop offset="0.5" stop-color="'+head+'"/><stop offset="1" stop-color="'+dkh+'"/></linearGradient>';
+  s+='<radialGradient id="'+u+'n" cx="0.35" cy="0.3" r="1">'
+    +'<stop offset="0" stop-color="'+lth+'"/><stop offset="1" stop-color="'+dkh+'"/></radialGradient>';
+  s+='<radialGradient id="'+u+'bg" cx="0.5" cy="0.42" r="0.75">'
+    +'<stop offset="0" stop-color="'+sh(c.bg,0.18)+'"/><stop offset="0.75" stop-color="'+c.bg+'"/>'
+    +'<stop offset="1" stop-color="'+sh(c.bg,-0.3)+'"/></radialGradient>';
+  s+='<filter id="'+u+'f" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>';
+  s+='<filter id="'+u+'f2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>';
+  s+='</defs>';
+  s+='<circle cx="100" cy="130" r="88" fill="url(#'+u+'bg)"/>';
+  s+='<ellipse cx="100" cy="'+(c.float?224:234)+'" rx="'+(c.float?40:58)+'" ry="'+(c.float?7:10)+'" fill="#26221B" opacity=".25" filter="url(#'+u+'f2)"/>';
+  var g='<g'+(c.float?' transform="translate(0,-12)"':'')+'>';
+  /* 腿：髋块+双柱腿+前伸脚板 */
+  g+='<rect x="67" y="156" width="66" height="16" rx="5" fill="url(#'+u+'l)"/>';
+  g+='<rect x="70" y="168" width="29" height="46" rx="5" fill="url(#'+u+'l)"/>';
+  g+='<rect x="101" y="168" width="29" height="46" rx="5" fill="url(#'+u+'l)"/>';
+  g+='<rect x="73" y="172" width="5" height="38" rx="2.5" fill="'+ltl+'" opacity=".5"/>';
+  g+='<rect x="104" y="172" width="5" height="38" rx="2.5" fill="'+ltl+'" opacity=".5"/>';
+  g+='<rect x="63" y="212" width="38" height="16" rx="5" fill="url(#'+u+'l)"/>';
+  g+='<rect x="99" y="212" width="38" height="16" rx="5" fill="url(#'+u+'l)"/>';
+  g+='<rect x="66" y="215" width="30" height="4" rx="2" fill="'+sh(legs,-0.55)+'" opacity=".35"/>';
+  g+='<rect x="102" y="215" width="30" height="4" rx="2" fill="'+sh(legs,-0.55)+'" opacity=".35"/>';
+  /* 手臂+肩关节 */
+  g+='<path d="M59,98 Q38,110 35,142" stroke="'+dkb+'" stroke-width="16" stroke-linecap="round" fill="none"/>';
+  g+='<path d="M56,99 Q40,111 36,138" stroke="'+ltb+'" stroke-width="5.5" stroke-linecap="round" fill="none" opacity=".55"/>';
+  g+='<path d="M141,98 Q162,110 165,142" stroke="'+dkb+'" stroke-width="16" stroke-linecap="round" fill="none"/>';
+  g+='<path d="M144,99 Q160,111 164,138" stroke="'+ltb+'" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".4"/>';
+  g+='<circle cx="60" cy="97" r="9.5" fill="url(#'+u+'b)" stroke="'+dkb+'" stroke-width="2"/>';
+  g+='<circle cx="140" cy="97" r="9.5" fill="url(#'+u+'b)" stroke="'+dkb+'" stroke-width="2"/>';
+  /* C形手 */
+  g+='<circle cx="35" cy="151" r="11" fill="url(#'+u+'n)"/>';
+  g+='<path d="M35,151 m8,3 a9,9 0 0,1 -10,7" stroke="'+dkh+'" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  g+='<circle cx="165" cy="151" r="11" fill="url(#'+u+'n)"/>';
+  g+='<path d="M165,151 m-8,3 a9,9 0 0,0 10,7" stroke="'+dkh+'" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  /* 躯干 */
+  g+='<path d="M60,88 L140,88 L134,160 L66,160 Z" fill="url(#'+u+'b)"/>';
+  g+='<ellipse cx="100" cy="90" rx="30" ry="6" fill="'+sh(body,-0.5)+'" opacity=".4" filter="url(#'+u+'f)"/>';
+  g+='<ellipse cx="80" cy="104" rx="14" ry="15" fill="#FFFFFF" opacity=".26" filter="url(#'+u+'f)" transform="rotate(-16 80 104)"/>';
+  /* 脖子+头顶小柱 */
+  g+='<path d="M88,76 L112,76 L110,90 L90,90 Z" fill="'+sh(head,-0.18)+'"/>';
+  g+='<rect x="88" y="11" width="24" height="15" rx="6" fill="url(#'+u+'n)"/>';
+  g+='<ellipse cx="100" cy="13" rx="9.5" ry="3.5" fill="'+lth+'"/>';
+  /* 头 */
+  g+='<rect x="58" y="24" width="84" height="54" rx="13" fill="url(#'+u+'h)"/>';
+  g+='<rect x="58" y="24" width="84" height="54" rx="13" fill="none" stroke="'+dkh+'" stroke-width="1.8" opacity=".5"/>';
+  g+='<ellipse cx="76" cy="36" rx="13" ry="7" fill="#FFFFFF" opacity=".5" filter="url(#'+u+'f)"/>';
+  g+='<rect x="134" y="32" width="4" height="38" rx="2" fill="'+dkh+'" opacity=".45" filter="url(#'+u+'f)"/>';
+  /* 表情 */
+  var E='stroke="'+ink+'" fill="none" stroke-linecap="round"';
+  function eye(x,y){return '<ellipse cx="'+x+'" cy="'+y+'" rx="4" ry="5" fill="'+ink+'"/><circle cx="'+(x-1.4)+'" cy="'+(y-1.8)+'" r="1.5" fill="#FFF"/>'}
+  function bags(cc){
+    return '<path d="M78,55 Q85,61 92,56" stroke="'+cc+'" stroke-width="2.6" fill="none" stroke-linecap="round"/>'
+         + '<path d="M108,56 Q115,61 122,55" stroke="'+cc+'" stroke-width="2.6" fill="none" stroke-linecap="round"/>';
+  }
+  var f=c.face;
+  if(f=="sparkle"){g+='<path d="M85,42 l2.5,6 6,1 -4.5,4 1,6 -5,-3 -5,3 1,-6 -4.5,-4 6,-1 z" fill="'+ink+'"/><path d="M115,42 l2.5,6 6,1 -4.5,4 1,6 -5,-3 -5,3 1,-6 -4.5,-4 6,-1 z" fill="'+ink+'"/><path d="M88,62 Q100,70 112,62" '+E+' stroke-width="3.5"/>';}
+  else if(f=="smile"){g+=eye(85,48)+eye(115,48)+'<path d="M88,62 Q100,72 112,62" '+E+' stroke-width="3.5"/>';}
+  else if(f=="shifty"){g+='<path d="M78,47 Q86,42 92,47" '+E+' stroke-width="3"/><path d="M108,47 Q114,42 122,47" '+E+' stroke-width="3"/><ellipse cx="90" cy="51" rx="3.5" ry="4.2" fill="'+ink+'"/><ellipse cx="114" cy="51" rx="3.5" ry="4.2" fill="'+ink+'"/><line x1="90" y1="65" x2="112" y2="65" '+E+' stroke-width="3"/>';}
+  else if(f=="dead"){g+='<line x1="79" y1="50" x2="93" y2="50" '+E+' stroke-width="4"/><line x1="107" y1="50" x2="121" y2="50" '+E+' stroke-width="4"/><line x1="90" y1="65" x2="112" y2="65" '+E+' stroke-width="3"/>';}
+  else if(f=="cool"){g+='<rect x="74" y="42" width="52" height="14" rx="6" fill="#26221B"/><rect x="77" y="44" width="12" height="4" rx="2" fill="#6B6B6B"/><line x1="68" y1="48" x2="74" y2="48" stroke="'+ink+'" stroke-width="3.5"/><line x1="126" y1="48" x2="132" y2="48" stroke="'+ink+'" stroke-width="3.5"/><line x1="90" y1="64" x2="112" y2="64" '+E+' stroke-width="3"/>';}
+  else if(f=="hollow"){g+='<circle cx="86" cy="49" r="6.5" fill="'+ink+'"/><circle cx="114" cy="49" r="6.5" fill="'+ink+'"/><circle cx="87" cy="48" r="2.2" fill="#B7E3C8" opacity=".9"/><circle cx="115" cy="48" r="2.2" fill="#B7E3C8" opacity=".9"/><ellipse cx="100" cy="66" rx="5" ry="4" fill="'+ink+'"/>';}
+  if(c.bags) g+=bags(c.bagc||"#9A6B8F");
+  /* 配件 */
+  var a=c.acc||"";
+  if(a.indexOf("coffee")>-1){
+    g+='<g><rect x="156" y="128" width="17" height="22" rx="3" fill="#FFFDF7" stroke="'+ink+'" stroke-width="2.6"/>'
+     +'<path d="M173,132 q9,3 6,10 q-2,6 -8,4" fill="none" stroke="'+ink+'" stroke-width="2.6"/>'
+     +'<path d="M157,129 h15" stroke="'+ink+'" stroke-width="2"/>'
+     +'<path d="M161,122 q-3,-6 1,-11 M167,122 q-3,-6 1,-11" stroke="#B7AF9F" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>';
+  }
+  if(a.indexOf("phone")>-1){
+    g+='<rect x="20" y="126" width="15" height="24" rx="3" fill="#3A3F4A" stroke="'+ink+'" stroke-width="2.4" transform="rotate(-8 27 138)"/>'
+     +'<rect x="22.5" y="129" width="10" height="16" rx="2" fill="#9BD0E8" transform="rotate(-8 27 138)"/>';
+  }
+  if(a.indexOf("badge")>-1){
+    g+='<path d="M92,90 Q100,108 100,116 M108,90 Q102,108 100,116" stroke="'+ink+'" stroke-width="2.2" fill="none"/>'
+     +'<rect x="89" y="114" width="22" height="26" rx="3" fill="#FFFDF7" stroke="'+ink+'" stroke-width="2.6"/>'
+     +'<rect x="93" y="118" width="14" height="10" rx="1.5" fill="#7EC8E3"/>'
+     +'<path d="M93,133 h14 M93,136.5 h9" stroke="'+ink+'" stroke-width="1.8" stroke-linecap="round"/>';
+  }
+  if(a.indexOf("cloud")>-1){g+='<path d="M136,30 q6,-12 20,-8 q12,-8 20,4 q10,2 4,12 q-4,8 -14,4 q-12,8 -22,0 q-12,0 -8,-12" fill="#E2E5EA" stroke="#B9BEC7" stroke-width="2.5"/>';}
+  if(a.indexOf("sprout")>-1){
+    g+='<g><path d="M35,151 V132" stroke="#5E8C3E" stroke-width="3" stroke-linecap="round"/>'
+     +'<circle cx="35" cy="126" r="6.5" fill="#FFB03A" stroke="'+ink+'" stroke-width="2.2"/>'
+     +'<circle cx="35" cy="126" r="2.4" fill="#FFFDF7"/></g>';
+  }
+  if(a.indexOf("stars")>-1){
+    g+='<path d="M158,26 l4,9 9,4 -9,4 -4,9 -4,-9 -9,-4 9,-4 z" fill="#FFE570" stroke="'+ink+'" stroke-width="2.2"/>'
+     +'<path d="M40,44 l3,7 7,3 -7,3 -3,7 -3,-7 -7,-3 7,-3 z" fill="#FFB25E" stroke="'+ink+'" stroke-width="2.2"/>';
+  }
+  if(a.indexOf("sweat")>-1){g+='<path d="M146,26 q7,10 0,16 q-7,-6 0,-16" fill="#7EC8E3" stroke="#4E93B8" stroke-width="2"/>';}
+  if(a.indexOf("stink")>-1){
+    g+='<path d="M46,96 q8,-6 0,-14 q-8,-8 0,-16" stroke="#7BA05B" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".85"/>'
+     +'<path d="M154,100 q8,-6 0,-14 q-8,-8 0,-16" stroke="#7BA05B" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".85"/>'
+     +'<path d="M158,148 q10,-8 0,-18" stroke="#7BA05B" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>'
+     +'<path d="M42,148 q-10,-8 0,-18" stroke="#7BA05B" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>';
+  }
+  if(a.indexOf("steam")>-1){g+='<path d="M74,18 q-4,-8 0,-14 M126,18 q4,-8 0,-14" stroke="#C9C1B2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>';}
+
+  /* ===== 打工人图鉴扩展配件 ===== */
+  if(a.indexOf("bolt")>-1){ /* 闪电：卷 */
+    g+='<path d="M154,16 l-12,20 9,2 -14,22" stroke="#FFD60A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'
+     +'<path d="M40,22 l-9,14 7,2 -10,16" stroke="#FFD60A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+  }
+  if(a.indexOf("pill")>-1){ /* 佛系木鱼/念珠 */
+    g+='<ellipse cx="100" cy="6" rx="30" ry="9" fill="none" stroke="#C49A5A" stroke-width="6"/>'
+     +'<g fill="#C49A5A"><circle cx="76" cy="4" r="5"/><circle cx="88" cy="9" r="5"/><circle cx="112" cy="9" r="5"/><circle cx="124" cy="4" r="5"/></g>'
+     +'<path d="M158,140 q10 -6 0 -14 q-10 8 0 14" fill="#E8C87A" opacity=".9"/>';
+  }
+  if(a.indexOf("bang")>-1){ /* 发疯感叹号 */
+    g+='<text x="150" y="46" font-size="34" font-weight="900" fill="#FF3B6B" font-family="sans-serif" transform="rotate(12 152 40)">!!</text>'
+     +'<path d="M30,52 q9,7 0,16 M40,42 q11,9 0,22" stroke="#FF3B6B" stroke-width="3.6" fill="none" stroke-linecap="round"/>';
+  }
+  if(a.indexOf("wind")>-1){ /* 甩锅：一阵风+纸片 */
+    g+='<path d="M18,104 q16,-10 32,0 q16,10 30,-2" stroke="#A9B4C2" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>'
+     +'<path d="M124,96 q14,-9 28,0" stroke="#A9B4C2" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>'
+     +'<rect x="40" y="118" width="20" height="26" rx="2" fill="#FFFDF7" stroke="'+ink+'" stroke-width="2" transform="rotate(-16 50 131)"/>'
+     +'<path d="M44,126 h12 M44,132 h12 M44,138 h8" stroke="#9AA8B8" stroke-width="1.8" transform="rotate(-16 50 131)"/>';
+  }
+  if(a.indexOf("antenna")>-1){ /* 复读机天线+声波 */
+    g+='<line x1="100" y1="12" x2="100" y2="3" stroke="'+ink+'" stroke-width="3"/><circle cx="100" cy="3" r="4.5" fill="#9AA8B8" stroke="'+ink+'" stroke-width="2"/>'
+     +'<path d="M26,52 l12,5 -12,5 M174,52 l-12,5 12,5" stroke="#7E8AA8" stroke-width="3" fill="none" stroke-linecap="round"/>'
+     +'<path d="M22,72 q6,3 0,8 M178,72 q-6,3 0,8" stroke="#7E8AA8" stroke-width="2.6" fill="none"/>';
+  }
+  if(a.indexOf("suitcase")>-1){ /* 离职：行李箱 */
+    g+='<g transform="translate(20 128)"><rect x="0" y="14" width="30" height="38" rx="5" fill="#8A5E3C" stroke="'+ink+'" stroke-width="2.4"/>'
+     +'<path d="M8,14 V8 a7,7 0 0 1 14,0 V14" fill="none" stroke="'+ink+'" stroke-width="3"/>'
+     +'<path d="M4,28 h22" stroke="#C9A070" stroke-width="2.6"/></g>'
+     +'<path d="M150,116 l10,-8 10,8" stroke="#E2603F" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  }
+  if(a.indexOf("burger")>-1){ /* 干饭：汉堡 */
+    g+='<g transform="translate(20 128)"><path d="M2,14 a15,15 0 0 1 30,0 Z" fill="#E8B33C" stroke="'+ink+'" stroke-width="2"/>'
+     +'<rect x="2" y="14" width="30" height="5" fill="#7A9A5B" stroke="'+ink+'" stroke-width="1.6"/>'
+     +'<rect x="2" y="19" width="30" height="6" fill="#B4613C" stroke="'+ink+'" stroke-width="1.6"/>'
+     +'<path d="M2,25 h30 v4 a4,4 0 0 1 -4,4 h-22 a4,4 0 0 1 -4,-4 Z" fill="#E8B33C" stroke="'+ink+'" stroke-width="2"/></g>';
+  }
+  if(a.indexOf("heart")>-1){ /* 老好人：爱心 */
+    g+='<path d="M160,36 c-6,-11 -20,-4 -13,7 l13,15 13,-15 c7,-11 -7,-18 -13,-7" fill="#FF6B8A" stroke="'+ink+'" stroke-width="2"/>'
+     +'<path d="M30,48 c-4,-8 -14,-3 -9,5 l9,10 9,-10 c5,-8 -5,-13 -9,-5" fill="#FF9FB5" stroke="'+ink+'" stroke-width="1.8"/>';
+  }
+  if(a.indexOf("q")>-1){ /* 问号 */
+    g+='<text x="146" y="48" font-size="38" font-weight="900" fill="#5E5CE6" font-family="sans-serif" transform="rotate(8 150 40)">?</text>';
+  }
+  g+='</g>';
+  s+=g+'</svg>';
+  return s;
+}
+
+
+/* ========= 状态与流程 ========= */
+var idx=0, ans=[];
+function getToken(){try{return new URLSearchParams(location.search).get("k")}catch(e){return null}}
+function start(){
+  if(ACCESS_TOKEN && getToken()!==ACCESS_TOKEN){alert("这个测试需要专属入口，请从购买后拿到的链接打开～");return;}
+  idx=0;ans=[];
+  document.getElementById("cover").classList.add("hide");
+  document.getElementById("result").classList.add("hide");
+  document.getElementById("quiz").classList.remove("hide");
+  window.scrollTo(0,0);render();
+}
+function render(){
+  var item=Q[idx];
+  document.getElementById("qnum").textContent=(idx+1)+" / "+Q.length;
+  document.getElementById("qdime").textContent=DIMS[dominantDim(item)];
+  document.getElementById("bar").style.width=(idx/Q.length*100)+"%";
+  document.getElementById("qtext").textContent=item.q;
+  var box=document.getElementById("opts");box.innerHTML="";
+  var letters=["A","B","C","D"];
+  item.opts.forEach(function(o,i){
+    var b=document.createElement("button");b.className="opt";
+    b.innerHTML='<span class="tag">'+letters[i]+'</span><span>'+o.t+'</span>';
+    b.onclick=function(){choose(i)};box.appendChild(b);
+  });
+  window.scrollTo(0,0);
+}
+function dominantDim(item){
+  var best=null,bv=0;
+  Object.keys(item.opts[0].d).forEach(function(k){var v=Math.abs(item.opts[0].d[k]);if(v>bv){bv=v;best=k}});
+  return DIMS[best!==null?best:0];
+}
+function choose(i){ans.push(i);idx++;if(idx>=Q.length){finish()}else{render()}}
+function finish(){
+  document.getElementById("quiz").classList.add("hide");
+  document.getElementById("result").classList.remove("hide");
+  renderResult();window.scrollTo(0,0);
+}
+function restart(){
+  document.getElementById("result").classList.add("hide");
+  document.getElementById("cover").classList.remove("hide");
+  window.scrollTo(0,0);
+}
+function shareTip(){
+  var n=document.getElementById("rName").textContent;
+  var t="我测出是打工人图鉴里的【"+n+"】，你是哪一款？";
+  try{if(navigator.share){navigator.share({title:"打工人图鉴",text:t});return}}catch(e){}
+  alert("长按上面的黑色卡片截图，发到群里对号入座就行");
+}
+/* ========= 引擎：8维累积 → 最近邻匹配 ========= */
+/* 每维理论最大分（用于归一化，消除量纲差异） */
+var MAXV=(function(){
+  var mx=[0,0,0,0,0,0,0,0];
+  Q.forEach(function(q){
+    var per={};
+    q.opts.forEach(function(o){Object.keys(o.d).forEach(function(k){per[k]=Math.max(per[k]||0,o.d[k])})});
+    Object.keys(per).forEach(function(k){mx[+k]+=per[k]});
+  });
+  return mx;
+})();
+function userVec(){
+  var u=[0,0,0,0,0,0,0,0];
+  ans.forEach(function(ai,qi){
+    var d=Q[qi].opts[ai].d;
+    Object.keys(d).forEach(function(k){u[+k]+=d[k]});
+  });
+  /* 归一化到 -2~2，再减去随机作答均值做中心化——让"随便选"落在原点 */
+  var MEAN=[0.67,0.75,0.17,0.07,0.17,0.00,-0.01,0.12];
+  for(var k=0;k<8;k++){ u[k]= (MAXV[k] ? (u[k]/MAXV[k]*2) : 0) - MEAN[k]; }
+  return u;
+}
+/* 各维随机作答标准差：区分度低的维度权重自动降低 */
+var SD=[0.36,0.54,0.83,0.80,0.64,0.90,0.91,0.71];
+function dist(a,b){
+  var s=0;
+  for(var i=0;i<a.length;i++){var d=(a[i]-b[i])/SD[i];s+=d*d;}
+  return Math.sqrt(s);
+}
+function renderResult(){
+  var u=userVec();
+  var ranked=TYPES.map(function(t,i){return {t:t,i:i,d:dist(u,t.v)}}).sort(function(a,b){return a.d-b.d});
+  var top=ranked[0];
+  /* Hero */
+  document.getElementById("hero").style.background="linear-gradient(155deg,"+top.t.color+","+sh(top.t.color,-0.35)+")";
+  document.getElementById("rNo").textContent=String(top.i+1).padStart(2,"0");
+  document.getElementById("rFig").innerHTML=legoF(top.t.cfg);
+  document.getElementById("rName").textContent=top.t.n;
+  document.getElementById("rTag").textContent=top.t.tag;
+  /* 症状 */
+  document.getElementById("rSyms").innerHTML=top.t.line.map(function(x,i){return '<div class="sym"><i>'+(i+1)+'</i><span>'+x+'</span></div>'}).join("");
+  /* 小传与金句 */
+  document.getElementById("rBio").textContent=top.t.doc;
+  document.getElementById("rQuote").textContent="「"+top.t.quote+"」";
+  /* 灵魂近邻：距离第二、第三近的类型 */
+  document.getElementById("rNeighbor").innerHTML=ranked.slice(1,4).map(function(r){
+    return '<span class="nb">'+r.t.n+'</span>'
+  }).join("")+'<span class="nb" style="background:transparent;border-style:dashed">还差一点就是它们</span>';
+  /* 图鉴 */
+  document.getElementById("rDex").innerHTML=TYPES.map(function(t,i){
+    var me=(i===top.i);
+    return '<div class="cell'+(me?' me':'')+'">'+(me?'<div class="here">你在这里</div>':'')
+      +legoF(t.cfg)+'<div class="dn">'+(i+1)+'. '+t.n+'</div></div>';
+  }).join("");
+  /* 分享卡 */
+  document.getElementById("sFig").innerHTML=legoF(top.t.cfg);
+  document.getElementById("sName").textContent=top.t.n;
+  document.getElementById("sTag").textContent=top.t.tag;
+  document.getElementById("sQuote").textContent="「"+top.t.quote+"」";
+}
+/* 封面图鉴预告：随机抽8款展示 */
+(function(){
+  var picks=[0,1,3,5,9,11,14,21];
+  document.getElementById("coverDex").innerHTML=picks.map(function(i){
+    return '<div>'+legoF(TYPES[i].cfg)+'<span>'+TYPES[i].n+'</span></div>';
+  }).join("");
+})();
+</script>
+</body></html>
